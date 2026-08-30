@@ -43,3 +43,41 @@ if __name__ == "__main__":
     nums = [-1, 0, 1, 2, -1, -4]
     result = solution.threeSum(nums)
     print(result)  # 输出: [[-1, -1, 2], [-1, 0, 1]]
+
+
+
+def func(nums:list[int]):
+     nums.sort()
+     ret = []
+     n = len(nums)
+     for i in range(n-2):
+          tmp = nums[i]
+          # 当前等于之前出现过的跳过
+          if i > 0 and tmp == nums[i-1]:
+               continue
+          # 当前大于0，后面不可能有和为0的组合
+          # tmp + nums[i+1] + nums[i+2] > 0 break
+          if tmp + nums[i+1] + nums[i+2] > 0:
+                break
+          # tmp + nums[n-2] + nums[n-1] < 0 break
+          if tmp + nums[n-2] + nums[n-1] < 0:
+               continue
+          # 使用双指针寻找另外两个数字
+          l,r = i+1, n-1
+          while l < r:
+               s = tmp + nums[j] + nums[k]
+               if s > 0:
+                    k -= 1
+
+               elif s < 0:
+                    j += 1
+
+               else:
+                    # 如果 j > i+1 且 nums[j] == nums[j-1] 则是重复的
+                    if j == i+1 or nums[j] != nums[j-1]:
+                        ret.append([tmp,nums[j],nums[k]])
+                    
+                    # 否则 左右指针同步移动
+                    j += 1
+                    k -= 1
+     return ret
