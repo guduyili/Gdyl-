@@ -20,7 +20,7 @@ class Solution:
 
 
 if __name__ == "__main__":
-    nums = [2,7,9,3,1]
+    nums = [2,7,9,3,2]
     solution = Solution()
     result = solution.rob(nums)
-    print(result)  # Output: 12
+    print(result)  # Output: 13
